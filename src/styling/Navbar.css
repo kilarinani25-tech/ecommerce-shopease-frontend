@@ -1,0 +1,355 @@
+/* ==========================================================================
+   1. GLOBAL VARIABLES & LIGHT THEME CORE
+   ========================================================================== */
+:root {
+  --nav-bg: rgba(13, 110, 253, 0.96);      /* Vibrant premium royal blue */
+  --nav-text: #ffffff;
+  --nav-text-muted: rgba(255, 255, 255, 0.8);
+  --admin-accent: #ffc107;                 /* Premium gold for admin identifiers */
+  --dropdown-card-bg: #ffffff;
+  --dropdown-item-text: #1f2937;
+  --dropdown-hover-bg: #f3f4f6;
+  
+  --shadow-main: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-dropdown: 0 10px 30px rgba(0, 0, 0, 0.15);
+  --smooth-transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base bounding-box rule protection */
+.navbar, .navbar * {
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   2. MAIN NAVBAR STRUCTURAL CONTAINER
+   ========================================================================== */
+.navbar {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  background: var(--nav-bg) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 14px 48px !important;            /* Premium widescreen edge spacing */
+  position: sticky !important;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  min-height: 76px;
+  box-shadow: var(--shadow-main) !important;
+  border: none !important;
+  transition: var(--smooth-transition);
+}
+
+/* Brand Section Layout */
+.logo-section {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+}
+
+.navbar-brand {
+  color: var(--nav-text) !important;
+  font-size: 26px !important;
+  font-weight: 800 !important;
+  text-decoration: none !important;
+  letter-spacing: -0.5px;
+}
+
+/* Premium "Admin Mode" Pill Accent */
+.badge.bg-warning {
+  background-color: var(--admin-accent) !important;
+  color: #111827 !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.6px;
+  padding: 5px 12px !important;
+  border-radius: 50px !important;
+  text-transform: uppercase;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* ==========================================================================
+   3. NAVIGATION LINK ELEMENTS & LISTS
+   ========================================================================== */
+.nav-links {
+  display: flex !important;
+  align-items: center !important;
+  list-style: none !important;
+  gap: 36px !important;                    /* Breathable horizontal gap */
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.nav-links .nav-link {
+  color: var(--nav-text-muted) !important;
+  text-decoration: none !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  padding: 8px 0 !important;
+  position: relative;
+  transition: var(--smooth-transition);
+}
+
+.nav-links .nav-link:hover {
+  color: var(--nav-text) !important;
+}
+
+/* Underline slide effect on link focus */
+.nav-links .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--nav-text);
+  transition: var(--smooth-transition);
+}
+
+.nav-links .nav-link:hover::after {
+  width: 100%;
+}
+
+/* Distinctive Add Product Highlight Link */
+.add-product-nav-link {
+  color: var(--admin-accent) !important;
+  text-decoration: none !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  transition: var(--smooth-transition);
+}
+
+.add-product-nav-link:hover {
+  color: #ffe082 !important;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   4. CATEGORIES DROPDOWN CONSTRAINTS (Anti-Flicker)
+   ========================================================================== */
+.category-dropdown-wrapper {
+  position: relative;
+}
+
+/* Pill trigger */
+.category-dropdown-wrapper .dropdown-toggle {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  color: var(--nav-text) !important;
+  padding: 8px 20px !important;
+  border-radius: 50px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  transition: var(--smooth-transition) !important;
+}
+
+.category-dropdown-wrapper .dropdown-toggle:hover,
+.category-dropdown-wrapper .dropdown-toggle.active {
+  background-color: rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Clean floating drop-down list panel */
+.category-dropdown-wrapper .dropdown-menu.show {
+  display: block !important;
+  position: absolute !important;
+  top: 100% !important;
+  right: 0 !important;
+  left: auto !important;
+  background-color: var(--dropdown-card-bg) !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 12px !important;
+  min-width: 240px !important;
+  box-shadow: var(--shadow-dropdown) !important;
+  padding: 8px 0 !important;
+  margin-top: 10px !important;
+  z-index: 1050 !important;
+  animation: adminNavDropdown 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes adminNavDropdown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.category-dropdown-wrapper .dropdown-item {
+  width: 100%;
+  background: transparent !important;
+  border: none !important;
+  padding: 10px 18px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: var(--dropdown-item-text) !important;
+  cursor: pointer;
+  transition: var(--smooth-transition);
+}
+
+.category-dropdown-wrapper .dropdown-item:hover {
+  background-color: var(--dropdown-hover-bg) !important;
+  color: #0d6efd !important;
+  padding-left: 24px !important;    /* Sleek nudge animation */
+}
+
+/* Inline Row Alignment for Admin Item Trashing */
+.category-dropdown-wrapper li.d-flex {
+  transition: background-color 0.15s;
+}
+
+.category-dropdown-wrapper li.d-flex:hover {
+  background-color: var(--dropdown-hover-bg);
+}
+
+/* Trash Button Styling */
+.category-dropdown-wrapper .btn-link.text-danger {
+  color: #9ca3af !important;
+  text-decoration: none !important;
+  padding: 6px !important;
+  border-radius: 6px;
+  transition: var(--smooth-transition);
+}
+
+.category-dropdown-wrapper .btn-link.text-danger:hover {
+  color: #ef4444 !important;
+  background-color: #fee2e2 !important;
+  transform: scale(1.1);
+}
+
+/* Manage Categories Operations Action Call-To-Action Button */
+.category-dropdown-wrapper .btn-warning {
+  font-size: 13px !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  background-color: var(--admin-accent) !important;
+  border: none !important;
+}
+
+.category-dropdown-wrapper .btn-warning:hover {
+  background-color: #e0a800 !important;
+}
+
+/* ==========================================================================
+   5. UTILITY RIG: SEARCH CONSOLE & COUNTERS
+   ========================================================================== */
+.nav-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 28px !important;
+}
+
+/* Search Field Base Structural Parameters */
+.search-container {
+  position: relative;
+}
+
+.search-box {
+  padding: 10px 20px !important;
+  border-radius: 50px !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  width: 230px !important;
+  outline: none;
+  font-size: 14px !important;
+  color: var(--nav-text) !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.search-box::placeholder {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.search-box:focus {
+  background-color: #ffffff !important;
+  color: #111827 !important;
+  width: 290px !important;                  /* Expands fluidly over empty gaps */
+  border-color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Search Output Autocomplete Panel Dropdown */
+.search-results.dropdown-menu.show {
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  width: 100% !important;
+  min-width: 290px !important;
+  background-color: var(--dropdown-card-bg) !important;
+  border-radius: 12px !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: var(--shadow-dropdown) !important;
+  padding: 6px 0 !important;
+  margin-top: 8px !important;
+  z-index: 2000 !important;
+}
+
+/* User Identity Tag Wrap */
+.user-profile-nav-block {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+}
+
+.welcome-name-tag {
+  white-space: nowrap !important;          /* Keeps text securely on one line */
+}
+
+/* ==========================================================================
+   6. INTERACTIVE THEME INVERSIONS (.dark-theme Engine Mode)
+   ========================================================================== */
+body.dark-theme {
+  --nav-bg: rgba(17, 24, 39, 0.96);        /* Dark slate carbon */
+  --dropdown-card-bg: #1f2937;
+  --dropdown-item-text: #e5e7eb;
+  --dropdown-hover-bg: #2d3748;
+}
+
+/* Hides/shows correct vector icons depending on active global theme classes */
+body.light-theme .dark-icon-only { display: none !important; }
+body.light-theme .light-icon-only { display: inline-block !important; }
+
+body.dark-theme .dark-icon-only { display: inline-block !important; }
+body.dark-theme .light-icon-only { display: none !important; }
+
+body.dark-theme .navbar {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+body.dark-theme .search-box {
+  background: rgba(255, 255, 255, 0.07) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.dark-theme .search-box:focus {
+  background-color: #111827 !important;
+  color: #ffffff !important;
+  border-color: #3b82f6 !important;
+}
+
+/* ==========================================================================
+   7. COLLAPSIBLE BREAKPOINT RESPONSIVENESS
+   ========================================================================== */
+@media (max-width: 992px) {
+  .navbar {
+    flex-direction: column !important;
+    gap: 18px !important;
+    padding: 20px !important;
+  }
+  .nav-links {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 20px !important;
+  }
+  .nav-right {
+    width: 100% !important;
+    justify-content: center !important;
+    gap: 20px !important;
+  }
+  .search-box, .search-box:focus {
+    width: 100% !important;
+  }
+  .category-dropdown-wrapper .dropdown-menu.show {
+    right: auto !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+}

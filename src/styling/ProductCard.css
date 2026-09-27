@@ -1,0 +1,156 @@
+.store-product-card {
+  background: var(--card-bg, #ffffff);
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+  height: 100%;
+  position: relative;
+}
+
+.store-product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.08), 0 4px 12px -4px rgba(0, 0, 0, 0.03);
+}
+
+.card-clickable-area {
+  text-decoration: none !important;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Image Configurations and Aspect Sizing */
+.card-image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 75%; /* Forces a standard crisp 4:3 Aspect Ratio window */
+  background-color: #f8fafc;
+  overflow: hidden;
+}
+
+.product-card-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.store-product-card:hover .product-card-img {
+  transform: scale(1.04);
+}
+
+/* Text Element Truncations & Alignments */
+.card-info-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 6px;
+}
+
+.product-brand-tag {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #64748b;
+  letter-spacing: 0.5px;
+}
+
+.product-title-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Safely cuts off massive titles at 2 lines with '...' */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.4;
+  height: 44px; 
+}
+
+.card-pricing-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.product-price-display {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.stock-indicator-pill {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Interactive Footer Grid Action Buttons */
+.card-action-footer {
+  padding: 0 16px 16px 16px;
+}
+
+.add-to-cart-action-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #0f172a;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease;
+}
+
+.add-to-cart-action-btn:hover {
+  background-color: #2563eb;
+}
+
+/* Sold Out Styling Overlays */
+.out-of-stock-card {
+  opacity: 0.8;
+}
+
+.out-of-stock-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.out-of-stock-overlay span {
+  background: #ef4444;
+  color: white;
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 50px;
+  letter-spacing: 0.5px;
+}
+
+.btn-disabled {
+  background-color: #cbd5e1 !important;
+  color: #64748b !important;
+  cursor: not-allowed !important;
+}

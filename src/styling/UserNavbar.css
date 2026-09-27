@@ -1,0 +1,388 @@
+/* ==========================================================================
+   1. LAYOUT VARIABLES & RESETS
+   ========================================================================== */
+:root {
+  --user-nav-bg: rgba(255, 255, 255, 0.85); /* Modern translucent glass base */
+  --user-nav-border: rgba(229, 231, 235, 0.7);
+  --user-primary: #0d6efd;                  /* Main focus brand blue */
+  --user-text-main: #1f2937;                /* Deep charcoal for legibility */
+  --user-text-muted: #6b7280;               /* Balanced gray text */
+  --user-shadow-sm: 0 2px 15px rgba(0, 0, 0, 0.05);
+  --user-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --user-radius-pill: 50px;
+  --user-radius-card: 12px;
+  --user-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.user-navbar, 
+.user-navbar * {
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   2. MAIN CORE STRUCTURAL WRAPPER
+   ========================================================================== */
+.user-navbar {
+  background: var(--user-nav-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--user-nav-border);
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 72px;
+  z-index: 1000;
+  box-shadow: var(--user-shadow-sm);
+  transition: var(--user-transition);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 12px 48px;
+}
+
+/* ==========================================================================
+   3. BRAND ID / LOGO TYPOGRAPHY
+   ========================================================================== */
+.nav-brand a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--user-text-main);
+  font-size: 24px;
+  font-weight: 800;
+  text-decoration: none;
+  letter-spacing: -0.6px;
+  transition: color 0.15s ease;
+}
+
+.nav-brand a:hover {
+  color: var(--user-primary);
+}
+
+.brand-icon {
+  color: var(--user-primary);
+  font-size: 24px;
+}
+
+/* ==========================================================================
+   4. NAVIGATION MENU LINKS & DROPDOWN SYSTEM
+   ========================================================================== */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 32px;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-link {
+  color: var(--user-text-main);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 8px 0;
+  position: relative;
+  transition: var(--user-transition);
+}
+
+.menu-link:hover {
+  color: var(--user-primary);
+}
+
+/* Underline slider on basic menu hover links */
+.menu-link::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--user-primary);
+  transition: var(--user-transition);
+}
+
+.menu-link:hover::after {
+  width: 100%;
+}
+
+/* Categories Dropdown Interactive Wrapper Elements */
+.dropdown-wrapper {
+  position: relative;
+}
+
+.dropdown-toggle-btn {
+  background: transparent;
+  border: 1px solid #d1d5db;
+  color: var(--user-text-main);
+  padding: 8px 18px;
+  border-radius: var(--user-radius-pill);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--user-transition);
+}
+
+.dropdown-toggle-btn:hover,
+.dropdown-toggle-btn.active {
+  background-color: #f9fafb;
+  border-color: var(--user-primary);
+  color: var(--user-primary);
+}
+
+.chevron {
+  font-size: 12px;
+  transition: transform 0.25s ease;
+}
+
+.chevron.rotate {
+  transform: rotate(180deg);
+}
+
+/* Floating clean customer collection popup lists */
+.dropdown-menu-list {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: var(--user-radius-card);
+  min-width: 220px;
+  box-shadow: var(--user-shadow-md);
+  padding: 6px 0;
+  margin: 0;
+  list-style: none;
+  animation: userDropdownSlide 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes userDropdownSlide {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-item {
+  width: 100%;
+  background: transparent;
+  border: none;
+  text-align: left;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--user-text-main);
+  cursor: pointer;
+  transition: var(--user-transition);
+}
+
+.dropdown-item:hover {
+  background-color: #f3f4f6;
+  color: var(--user-primary);
+  padding-left: 22px;
+}
+
+.dropdown-item.active-item {
+  background-color: #e6f0ff;
+  color: var(--user-primary);
+  font-weight: 700;
+}
+
+.menu-divider {
+  height: 1px;
+  background-color: #f3f4f6;
+  margin: 6px 0;
+}
+
+/* ==========================================================================
+   5. SEARCH ENGINE UTILITIES
+   ========================================================================== */
+.nav-utilities {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.search-bar-wrapper {
+  position: relative;
+}
+
+.search-inside-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--user-text-muted);
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.user-search-input {
+  padding: 9px 16px 9px 38px;
+  border-radius: var(--user-radius-pill);
+  border: 1px solid #d1d5db;
+  background-color: #f9fafb;
+  width: 260px;
+  outline: none;
+  font-size: 14px;
+  color: var(--user-text-main);
+  transition: var(--user-transition);
+}
+
+.user-search-input::placeholder {
+  color: #9ca3af;
+}
+
+.user-search-input:focus {
+  background-color: #ffffff;
+  border-color: var(--user-primary);
+  width: 320px; /* Comfortably expands away from other elements */
+  box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.1);
+}
+
+/* Predictive customer dropdown rows layout matches */
+.predictive-search-results {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  min-width: 320px;
+  background: #ffffff;
+  border-radius: var(--user-radius-card);
+  border: 1px solid #e5e7eb;
+  box-shadow: var(--user-shadow-md);
+  list-style: none;
+  padding: 6px 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.search-result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  text-decoration: none;
+  color: var(--user-text-main);
+  font-size: 14px;
+  transition: background-color 0.15s ease;
+}
+
+.search-result-row:hover {
+  background-color: #f3f4f6;
+}
+
+.search-result-row span {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 12px;
+}
+
+.search-result-row small {
+  font-weight: 700;
+  color: var(--user-primary);
+}
+
+.no-search-results {
+  text-align: center;
+  color: var(--user-text-muted);
+  font-size: 13px;
+  padding: 12px;
+}
+
+/* ==========================================================================
+   6. PREMIUM CUSTOMER CART INTERFACE
+   ========================================================================== */
+.customer-cart-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--user-text-main);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 6px 12px;
+  border-radius: var(--user-radius-pill);
+  transition: var(--user-transition);
+}
+
+.customer-cart-link:hover {
+  background-color: #f3f4f6;
+  color: var(--user-primary);
+}
+
+.cart-icon-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-icon-container i {
+  font-size: 20px;
+}
+
+/* Red counter badge accent resting elegantly on the cart handle */
+.cart-badge-counter {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background-color: #ef4444; /* Clean signal red indicator */
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  border: 2px solid #ffffff; /* Prevents visual bleed over the black icon */
+}
+
+.cart-label {
+  font-size: 14px;
+}
+
+/* ==========================================================================
+   7. COLLAPSIBLE MEDIA BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 992px) {
+  .nav-container {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px 24px;
+  }
+  
+  .nav-menu {
+    gap: 24px;
+  }
+  
+  .nav-utilities {
+    width: 100%;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .search-bar-wrapper {
+    flex-grow: 1;
+  }
+
+  .user-search-input,
+  .user-search-input:focus {
+    width: 100%;
+  }
+
+  .predictive-search-results {
+    width: 100%;
+  }
+}
